@@ -1,0 +1,33 @@
+<%= render 'layouts/nav', user: @user %>
+<div class="body">
+  <div class=container>
+    <%= flash[:sign_in] %>
+    <div class="row">
+      <%= render 'layouts/profile', user: @user, book: @book %>
+      <div class="col-xs-9">
+        <h2>Users</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>image</th>
+              <th>name</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td></td>
+                <td><%= attachment_image_tag user, :profile_image, :fill, 60, 60,  fallback: "no_image.jpg"%></td>
+                <td><%= user.name %></td>
+                <td><%= link_to "Show", user_path(user.id) %></td>
+              </tr>
+            <% end %>
+            <%= paginate @users, class: "paginate" %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

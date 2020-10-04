@@ -1,0 +1,33 @@
+<%= render 'layouts/nav', user: @user %>
+<div class="body">
+  <div class="container">
+    <%= flash[:update] %>
+    <h2>User info</h2>
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li>error</li>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% f.email_field :email %>
+      <div class="field">
+        <label for="user_name">Name</label>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <label for="user_image">Image</label>
+        <%= f.attachment_field :profile_image, placeholder: "ファイルを選択", class: "user-edit-form" %>
+      </div>
+      <div class="field">
+        <label for="user_introduction">Introduction</label>
+        <%= f.text_area :introduction %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update User" %>
+      </div>
+    <% end %>
+  </div>
+</div>
